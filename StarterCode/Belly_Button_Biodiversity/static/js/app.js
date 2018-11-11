@@ -42,8 +42,13 @@ function buildCharts(sample) {
       hovertext: c
     };
 
+    var layout = {
+      height: 400,
+      width: 500
+    };
+
   var data = [trace];
-  Plotly.newPlot("pie", data);
+  Plotly.newPlot("pie", data, layout);
 // @TODO: Build a Bubble Chart using the sample data
   var trace1 = {
     type: "bubble",
