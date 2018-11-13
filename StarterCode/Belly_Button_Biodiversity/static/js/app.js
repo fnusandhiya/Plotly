@@ -30,21 +30,21 @@ function buildCharts(sample) {
     console.log(response);
     // HINT: You will need to use slice() to grab the top 10 sample_values,
     // otu_ids, and labels (10 each).
-    var a = response['otu_ids'].slice(0,11)
+    var a = response['otu_ids'].slice(0,10)
     console.log(a);
-    var b = response['sample_values'].slice(0, 11)
-    var c = response['otu_labels'].slice(0, 11)
+    var b = response['sample_values'].slice(0, 10)
+    var c = response['otu_labels'].slice(0, 10)
     // @TODO: Build a Pie Chart
     var trace = {
       type: "pie",
       lables: a,
-      value: b,
+      values: b,
       hovertext: c
     };
 
     var layout = {
-      height: 400,
-      width: 500
+      height: 700,
+      width: 400
     };
 
   var data = [trace];
@@ -52,21 +52,26 @@ function buildCharts(sample) {
 // @TODO: Build a Bubble Chart using the sample data
   var trace1 = {
     type: "bubble",
-    x= a,
-    y= b,
-    mode='markers',
+    x: response['otu_ids'],
+    y: response['sample_values'],
+    text: response['sample_values'],
+    mode:'markers',
     marker: {
       size: response['sample_values'],
       colors: response['otu_ids'],
-      text: response['otu_labels']
+      colorscale: 'Earth'
     }
   };
-
+  var Layout = {
+    margin: { t: 0 },
+    xaxis: { title: 'OTU ID' }
+};
   var data1 = [trace1];
-  Plotly.newPlot("bubble", data1);
+
+  Plotly.newPlot("bubble", data1, Layout);
 
   });
-}
+};
 
 function init() {
   // Grab a reference to the dropdown select element
