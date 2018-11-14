@@ -31,20 +31,24 @@ function buildCharts(sample) {
     // HINT: You will need to use slice() to grab the top 10 sample_values,
     // otu_ids, and labels (10 each).
     var a = response['otu_ids'].slice(0,10)
-    console.log(a);
+    //console.log(a);
     var b = response['sample_values'].slice(0, 10)
     var c = response['otu_labels'].slice(0, 10)
     // @TODO: Build a Pie Chart
     var trace = {
       type: "pie",
-      lables: a,
+      labels: a,
       values: b,
       hovertext: c
     };
 
     var layout = {
-      height: 700,
+      margin:{
+      height: 900,
       width: 400
+      },
+      height:1000,
+      width: 700
     };
 
   var data = [trace];
@@ -54,11 +58,11 @@ function buildCharts(sample) {
     type: "bubble",
     x: response['otu_ids'],
     y: response['sample_values'],
-    text: response['sample_values'],
+    text: response['otu_labels'],
     mode:'markers',
     marker: {
       size: response['sample_values'],
-      colors: response['otu_ids'],
+      color: response['otu_ids'],
       colorscale: 'Earth'
     }
   };
